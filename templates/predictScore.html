@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict score Form</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    <h1>Predict score</h1>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.subject_focus.label }} {{ form.subject_focus() }}
+        </p>
+        <p>
+            {{ form.eyes.label }} {{ form.eyes() }}
+        </p>
+        <p>
+            {{ form.face.label }} {{ form.face() }}
+        </p>
+        <p>
+            {{ form.near.label }} {{ form.near() }}
+        </p>
+        <p>
+            {{ form.action.label }} {{ form.action() }}
+        </p>
+        <p>
+            {{ form.accessory.label }} {{ form.accessory() }}
+        </p>
+        <p>
+            {{ form.group.label }} {{ form.group() }}
+        </p>
+        <p>
+            {{ form.collage.label }} {{ form.collage() }}
+        </p>
+        <p>
+            {{ form.human.label }} {{ form.human() }}
+        </p>
+        <p>
+            {{ form.occlusion.label }} {{ form.occlusion() }}
+        </p>
+        <p>
+            {{ form.info.label }} {{ form.info() }}
+        </p>
+        <p>
+            {{ form.blur.label }} {{ form.blur() }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</body>
+</html>

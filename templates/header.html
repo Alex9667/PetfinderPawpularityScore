@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+   <button id="homeButton">Hjem</button>
+   <button id="imageScoreButton">Billede og score</button>
+   <button id="predictButton">Forudse score</button>
+   <script>
+    document.getElementById("homeButton").onclick = function(){
+        window.location.href = "/"
+    };
+    document.getElementById("imageScoreButton").onclick = function(){
+        window.location.href = "/imageScore"
+    };
+    document.getElementById("predictButton").onclick = function(){
+        window.location.href = "/predict"
+    };
+   </script>
+</body>
+</html>
