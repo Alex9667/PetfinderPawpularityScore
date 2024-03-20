@@ -85,8 +85,11 @@ def predict():
 @app.route("/imageScore", methods=['GET', 'POST'])
 def imageScore():
     form = ImageScoreForm()
+    score = None  # Initialize score to None
+    
     if form.validate_on_submit():
         id = form.id.data
+        score = ImageScoreForm(id)
 
         return send_from_directory('Data/train', id + '.jpg')
     

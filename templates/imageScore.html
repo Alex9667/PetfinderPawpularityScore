@@ -16,6 +16,10 @@
         <p>{{ form.submit() }}</p>
     </form>
     <div id="imageContainer"></div>
+        {% if score %}
+        <p>Score: {{ score }}</p>
+        {% endif %}
+    <div id="scoreContainer"></div>
 
     <script>
         document.getElementById('imageForm').addEventListener('submit', function(event) {
@@ -32,6 +36,8 @@
             .then(blob => {
                 var imageUrl = URL.createObjectURL(blob);
                 document.getElementById('imageContainer').innerHTML = '<img src="' + imageUrl + '" alt="Image">';
+
+                document.getElementById('scoreContainer').innerText = 'Score: ' + data.score;
             })
             .catch(error => {
                 console.error('Error:', error);
