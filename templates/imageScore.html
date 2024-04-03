@@ -15,11 +15,13 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
-    <div id="imageContainer"></div>
-        {% if score %}
+    <div id="imageContainer">     
+    </div>
+    <div id="scoreContainer">
+        
         <p>Score: {{ score }}</p>
-        {% endif %}
-    <div id="scoreContainer"></div>
+        
+    </div>
 
     <script>
         document.getElementById('imageForm').addEventListener('submit', function(event) {
