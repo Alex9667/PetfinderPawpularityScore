@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrics Form</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    <h1>Metrics over modeller</h1>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+    </form>
+    <p id="name">{{name}}</p>
+</body>
+<script>
+    function setName() {
+        document.getElementById("name").innerHTML = name;
+    }
+</script>
+</html>
