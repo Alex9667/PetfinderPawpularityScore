@@ -9,12 +9,11 @@ from wtforms import SubmitField, BooleanField, StringField
 from flask import Flask
 
 from sklearn.linear_model import LinearRegression, LogisticRegression
-from sklearn.metrics import accuracy_score
 
 from correlation_matrix import *
 from ROC_curve import *
 
-app = Flask(__name__)
+app = Flask(__name__,  static_folder='static')
 app.secret_key = 'tO$&!|0wkamvVia0?n$NqIRVWOG'
 bootstrap = Bootstrap5(app)
 csrf = CSRFProtect(app)
@@ -33,6 +32,23 @@ def linear_regression():
     reg = LinearRegression()
     reg.fit(X,y)
     return reg
+
+global log_reg 
+log_reg = LogisticRegression()
+def logistic_regression_contains_human():
+    X = data[["Occlusion", "Near", "Subject Focus", "Group"]]
+    y = data['Human'].values
+    global log_reg
+    log_reg.fit(X,y)
+    test_data = pd.read_csv(r'Data\test.csv')
+    x_test= test_data[["Occlusion", "Near", "Subject Focus", "Group"]]
+    y_test = test_data["Human"]
+    y_pred = log_reg.predict(x_test)
+    
+    ROCCurve(log_reg,X, y)
+
+    return log_reg
+# logistic_regression_contains_human()
 
 
 def predictScore(Subject_focus, Eyes, Face, Near, Action, Accessory, Group, Collage, Human, Occlusion, Info, Blur):
@@ -61,6 +77,11 @@ class ImageScoreForm(FlaskForm):
         
     submit = SubmitField('Submit')
 
+class MetricsForm(FlaskForm):
+    name = StringField('Id')
+    score = 0
+        
+    submit = SubmitField('Submit')
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
@@ -88,22 +109,6 @@ def predict():
 
     return render_template('predictScore.html', form=form)
 
-def logistic_regression_contains_human():
-    X = data[["Occlusion", "Near", "Subject Focus", "Group"]]
-    y = data['Human'].values
-    global log_reg
-    log_reg = LogisticRegression()
-    log_reg.fit(X,y)
-    test_data = pd.read_csv(r'Data\test.csv')
-    x_test= test_data[["Occlusion", "Near", "Subject Focus", "Group"]]
-    y_test = test_data["Human"]
-    y_pred = log_reg.predict(x_test)
-    
-    ROCCurve(log_reg,X, y)
-
-    return log_reg
-# logistic_regression_contains_human()
-
 @app.route("/imageScore", methods=['GET', 'POST'])
 def imageScore():
     form = ImageScoreForm()
@@ -117,17 +122,11 @@ def imageScore():
     
     return render_template('imageScore.html', form=form)
 
-class MetricsForm(FlaskForm):
-    name = StringField('Id')
-    score = 0
-        
-    submit = SubmitField('Submit')
-
 @app.route("/metrics", methods=['GET', 'POST'])
 def metrics():
-    form = MetricsForm()
-    name = "hi"
 
-    return render_template("metrics.html", form=form, context=name)
+    form = MetricsForm()
+    logistic_regression_contains_human()
+    return render_template("metrics.html", form=form, imgurl="../Assets/roccurve.jpg")
 
 # correlationMatrix(data)

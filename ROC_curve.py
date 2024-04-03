@@ -11,4 +11,5 @@ def ROCCurve(reg, X, y):
     plt.xlabel('False positive Rate (1 - specificity)')
     plt.ylabel('True Positive Rate ')
     plt.legend(loc='lower right')
-    plt.show()
+    plt.savefig("./static/roccurve.jpg")
+    # plt.show()

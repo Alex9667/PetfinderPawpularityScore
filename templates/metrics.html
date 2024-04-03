@@ -11,11 +11,7 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
     </form>
-    <p id="name">{{name}}</p>
+    <img src="{{ url_for('static', filename='roccurve.jpg') }}" alt="Image"/>
 </body>
-<script>
-    function setName() {
-        document.getElementById("name").innerHTML = name;
-    }
-</script>
+
 </html>
