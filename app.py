@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 from flask import Flask, render_template, send_from_directory
 from flask_bootstrap import Bootstrap5
@@ -94,3 +95,8 @@ def imageScore():
         return send_from_directory('Data/train', id + '.jpg')
     
     return render_template('imageScore.html', form=form)
+
+@app.route("/human", methods=['GET', 'POST'])
+def human():
+    
+    return render_template('human.html')
